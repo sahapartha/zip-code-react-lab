@@ -43,7 +43,7 @@ class App extends Component {
 
   handleZipChange(event){
     //console.log(event.target.value);
-      if(event.target.value.length===5)
+      if(event.target.value.length===5){
         fetch('http://ctp-zip-api.herokuapp.com/zip/'+event.target.value)
         .then(res => res.json())
         .then(jsonData =>{
@@ -51,8 +51,10 @@ class App extends Component {
           this.setState({
             searchData: jsonData
           })
-        });
-      if(event.target.value.length!==5){
+        })
+        .catch(err => this.setState({ result: []}));
+      }
+      else{
         this.setState({
           searchData:[]
         })
